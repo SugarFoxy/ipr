@@ -5,7 +5,6 @@ import io.qameta.allure.Owner;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.TestConfiguration;
 import perf.api.user.service.UserDbService;
 import perf.api.user.service.UserService;
 import perf.ipr.MySpringTestFrameworkApp;
@@ -13,8 +12,7 @@ import perf.ipr.MySpringTestFrameworkApp;
 import static perf.api.user.common.StatusChecker.checkStatus;
 
 @Owner("Авилова")
-@SpringBootTest(classes = {MySpringTestFrameworkApp.class})
-@TestConfiguration()
+@SpringBootTest(classes = MySpringTestFrameworkApp.class)
 public class UserStepTest {
     @Autowired
     private UserService userService;

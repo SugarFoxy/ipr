@@ -5,8 +5,9 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.postgresql.util.PSQLException;
+import org.springframework.test.context.ContextConfiguration;
+import perf.ipr.MySpringTestFrameworkApp;
 
-import java.io.Console;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 //Создала чисто для того чтобы показать что с бд могу и так работать.
+@ContextConfiguration(classes = MySpringTestFrameworkApp.class)
 public class DbTest {
     private static DataBaseQueries dataBaseQueries;
 

@@ -2,7 +2,9 @@ package perf.api.user.service;
 
 import io.qameta.allure.Step;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import perf.api.user.dto.UserDto;
 import perf.api.user.model.User;
 import perf.api.user.repository.UserRepository;
@@ -13,7 +15,7 @@ import static perf.api.user.mapper.UserMapper.toUserDto;
 import static perf.api.user.service.UserServiceImpl.getId;
 import static perf.api.user.service.UserServiceImpl.getUserDto;
 
-@Component
+@Service
 public class UserDbServiceImpl implements UserDbService {
     @Autowired
     private UserRepository userRepository;

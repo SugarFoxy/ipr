@@ -2,7 +2,9 @@ package perf.api.user.service;
 
 import io.qameta.allure.Step;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import perf.api.core.RestRequest;
 import perf.api.user.dto.UserDto;
 
@@ -11,7 +13,7 @@ import java.util.Map;
 import static perf.api.user.template.UserTemplate.*;
 import static perf.api.util.GeneratorJson.toJson;
 
-@Component
+@Service
 public class UserServiceImpl implements UserService {
     @Autowired
     private RestRequest request;

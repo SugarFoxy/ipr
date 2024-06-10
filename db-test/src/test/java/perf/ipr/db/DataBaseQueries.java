@@ -1,14 +1,11 @@
 package perf.db;
 
 import lombok.extern.slf4j.Slf4j;
-import perf.ipr.EnvironmentConfiguration;
 
 import java.sql.*;
 
 @Slf4j
 public class DataBaseQueries {
-    private final EnvironmentConfiguration environmentData = new EnvironmentConfiguration();
-    //TODO переменые среды
     private final Connection connection = DriverManager.getConnection(
             "jdbc:postgresql://localhost:5434/shareit", "root", "root");
     private final Statement stmt = connection.createStatement();
