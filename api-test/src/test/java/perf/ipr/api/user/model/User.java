@@ -1,4 +1,4 @@
-package perf.api.user.model;
+package perf.ipr.api.user.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,4 +1,4 @@
-package perf.api.core;
+package perf.ipr.api.core;
 
 import io.restassured.response.Response;
 import org.springframework.beans.factory.annotation.Autowired;

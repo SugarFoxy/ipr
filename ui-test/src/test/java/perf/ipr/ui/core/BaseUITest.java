@@ -11,7 +11,6 @@ public class BaseUITest {
     public void init(){
         configure();
         Selenide.open("/");
-        //open("/");
     }
     @AfterEach
     public void close(){

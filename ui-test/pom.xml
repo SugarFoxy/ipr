@@ -7,8 +7,8 @@
         <groupId>perf</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
+
     <modelVersion>4.0.0</modelVersion>
-    <groupId>perf</groupId>
     <artifactId>ui-test</artifactId>
 
     <properties>
@@ -19,24 +19,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>perf</groupId>
-            <artifactId>main-module</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <version>${spring.boot.version}</version>
-        </dependency>
-        <dependency>
             <groupId>com.codeborne</groupId>
             <artifactId>selenide</artifactId>
             <version>${selenide.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.qameta.allure</groupId>
-            <artifactId>allure-junit5</artifactId>
-            <version>${allure.version}</version>
         </dependency>
     </dependencies>
 

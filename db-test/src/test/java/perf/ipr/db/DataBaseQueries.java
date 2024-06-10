@@ -1,4 +1,4 @@
-package perf.db;
+package perf.ipr.db;
 
 import lombok.extern.slf4j.Slf4j;
 

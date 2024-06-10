@@ -1,7 +1,7 @@
-package perf.api.user.template;
+package perf.ipr.api.user.template;
 
 import org.springframework.stereotype.Component;
-import perf.api.user.dto.UserDto;
+import perf.ipr.api.user.dto.UserDto;
 
 import java.time.LocalDateTime;
 

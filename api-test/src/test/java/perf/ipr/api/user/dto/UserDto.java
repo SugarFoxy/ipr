@@ -1,4 +1,4 @@
-package perf.api.user.dto;
+package perf.ipr.api.user.dto;
 
 import lombok.*;
 

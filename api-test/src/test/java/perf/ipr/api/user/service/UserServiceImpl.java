@@ -1,17 +1,14 @@
-package perf.api.user.service;
+package perf.ipr.api.user.service;
 
 import io.qameta.allure.Step;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-import perf.api.core.RestRequest;
-import perf.api.user.dto.UserDto;
+import perf.ipr.api.core.RestRequest;
+import perf.ipr.api.user.dto.UserDto;
+import perf.ipr.api.user.template.UserTemplate;
+import perf.ipr.api.util.GeneratorJson;
 
 import java.util.Map;
-
-import static perf.api.user.template.UserTemplate.*;
-import static perf.api.util.GeneratorJson.toJson;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -23,22 +20,22 @@ public class UserServiceImpl implements UserService {
     @Override
     @Step("Создать нового пользователя POST /users")
     public void createUser() {
-        UserServiceImpl.userDto = getCorrectUserData();
+        UserServiceImpl.userDto = UserTemplate.getCorrectUserData();
         creteResponse(userDto);
         setId();
     }
 
     @Override
     public void createDuplicateUser() {
-        creteResponse(getDuplicateUserData());
+        creteResponse(UserTemplate.getDuplicateUserData());
     }
 
     @Override
     @Step("Обновить данные пользователя PATCH /users/{userId}")
     public void updateUser() {
-        UserServiceImpl.userDto = getUpdateUserData();
+        UserServiceImpl.userDto = UserTemplate.getUpdateUserData();
         request.executePatchRequestWithPathParam("/users/{userId}",
-                toJson(userDto),
+                GeneratorJson.toJson(userDto),
                 Map.of("userId", id));
     }
 
@@ -68,6 +65,6 @@ public class UserServiceImpl implements UserService {
 
     private void creteResponse(UserDto userDto) {
         request.executePostRequest("/users",
-                toJson(userDto));
+                GeneratorJson.toJson(userDto));
     }
 }

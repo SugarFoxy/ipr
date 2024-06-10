@@ -1,18 +1,17 @@
-package perf.api.user;
+package perf.ipr.api.user;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Owner;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import perf.api.user.service.UserDbService;
-import perf.api.user.service.UserService;
-import perf.ipr.MySpringTestFrameworkApp;
+import perf.ipr.api.user.service.UserDbService;
+import perf.ipr.api.user.service.UserService;
 
-import static perf.api.user.common.StatusChecker.checkStatus;
+import static perf.ipr.api.user.common.StatusChecker.checkStatus;
 
 @Owner("Авилова")
-@SpringBootTest(classes = MySpringTestFrameworkApp.class)
+@SpringBootTest
 public class UserStepTest {
     @Autowired
     private UserService userService;

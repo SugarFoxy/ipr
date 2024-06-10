@@ -1,7 +1,7 @@
-package perf.api.user.mapper;
+package perf.ipr.api.user.mapper;
 
-import perf.api.user.dto.UserDto;
-import perf.api.user.model.User;
+import perf.ipr.api.user.dto.UserDto;
+import perf.ipr.api.user.model.User;
 
 public class UserMapper {
     public static UserDto toUserDto(User user){

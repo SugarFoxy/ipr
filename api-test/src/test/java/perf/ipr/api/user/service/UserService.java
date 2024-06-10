@@ -1,4 +1,4 @@
-package perf.api.user.service;
+package perf.ipr.api.user.service;
 
 
 public interface UserService {

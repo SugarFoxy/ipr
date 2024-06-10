@@ -6,10 +6,10 @@ import org.springframework.test.context.ContextConfiguration;
 
 @SpringBootApplication
 @ContextConfiguration()
-public class MySpringTestFrameworkApp {
+public class SpringApiTestApp {
 
     public static void main(String[] args) {
-        SpringApplication.run(MySpringTestFrameworkApp.class, args);
+        SpringApplication.run(SpringApiTestApp.class, args);
     }
 
 }

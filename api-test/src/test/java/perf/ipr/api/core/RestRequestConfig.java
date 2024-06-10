@@ -1,26 +1,31 @@
-package perf.api.core;
+package perf.ipr.api.core;
 
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import perf.ipr.EnvironmentConfiguration;
+
 
 @Component
 public class RestRequestConfig {
-    @Autowired
-    private EnvironmentConfiguration environmentData;
 
+    //    @Autowired
+//    private Environment env;
+    String serverUrl = "http://localhost:9090";
     public RequestSpecification getSpecificationForGetAndDelete() {
+//        var serverUrl = env.getProperty("my.property");
+        System.out.println("url::");
+        System.out.println(serverUrl);
         return new RequestSpecBuilder()
-                .setBaseUri(environmentData.getUrl())
+                .setBaseUri(serverUrl)
                 .build();
     }
 
     public RequestSpecification getSpecificationForPostAndPatch(String body) {
+        System.out.println("url::");
+        System.out.println(serverUrl);
         return new RequestSpecBuilder()
-                .setBaseUri(environmentData.getUrl())
+                .setBaseUri(serverUrl)
                 .setContentType(ContentType.JSON)
                 .setBody(body)
                 .build();

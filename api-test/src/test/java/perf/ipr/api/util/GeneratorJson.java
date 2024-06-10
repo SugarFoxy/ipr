@@ -1,4 +1,4 @@
-package perf.api.util;
+package perf.ipr.api.util;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
