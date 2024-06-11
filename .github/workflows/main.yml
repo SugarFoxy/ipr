@@ -30,3 +30,7 @@ jobs:
           cd java-shareit
           mvn -DskipTests=true package
           docker-compose up
+
+      - name: Disable docker
+        run: docker-compose stop
+
