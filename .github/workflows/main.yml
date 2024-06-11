@@ -28,10 +28,9 @@ jobs:
       - name: Build project
         run: |
           cd java-shareit
-          ls
-          mvn clean package
+          mvn -DskipTests=true package
           
-#      - name: Run docker-compose #запускаем сборку проекта
-#        uses: docker/compose-action@v2
-#        with:
-#          file: 'java-shareit/docker-compose.yml'          
+      - name: Run docker-compose #запускаем сборку проекта
+        uses: docker/compose-action@v2
+        with:
+          file: 'java-shareit/docker-compose.yml'          
