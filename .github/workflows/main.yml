@@ -30,7 +30,7 @@ jobs:
           cd 'java-shareit'
           ./mvnw clean package
           
-      - name: Run docker-compose #запускаем сборку проекта
-        uses: docker/compose-action@v2
-        with:
-          file: 'java-shareit/docker-compose.yml'          
+#      - name: Run docker-compose #запускаем сборку проекта
+#        uses: docker/compose-action@v2
+#        with:
+#          file: 'java-shareit/docker-compose.yml'          
