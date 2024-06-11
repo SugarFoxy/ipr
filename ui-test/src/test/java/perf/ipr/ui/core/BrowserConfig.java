@@ -1,18 +1,14 @@
 package perf.ipr.ui.core;
 
 import com.codeborne.selenide.Configuration;
+import perf.ipr.PropertiesConfiguration;
+
 
 public class BrowserConfig {
-    public static void configure() {
+    public static void configure(PropertiesConfiguration configuration) {
         Configuration.browser = "chrome";
         Configuration.startMaximized = true;
-        Configuration.baseUrl = "https://www.kinopoisk.ru/";
+        Configuration.baseUrl = configuration.getUrl();
         Configuration.timeout = 10000;
-        /*ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--disable-notifications");
-        chromeOptions.addArguments("--start-maximized");
-        chromeOptions.setBinary("/chromedriver.exe");
-        //chromeOptions.setCapability("webdriver.chrome.driver", "/chromedriver.exe");
-        Configuration.browserCapabilities = chromeOptions;;*/
     }
 }

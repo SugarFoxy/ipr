@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import perf.ipr.PropertiesConfiguration;
 import perf.ipr.ui.core.BaseUITest;
 import perf.ipr.ui.service.*;
 
@@ -22,13 +23,11 @@ public class SearchMovieTest extends BaseUITest {
     @Autowired
     private CheckBoxService checkBoxService;
 
-
     @BeforeEach
     public void init() {
         super.init();
         buttonService.clickButton("Расширеный поиск");
     }
-
 
     @Test
     public void checkCardSearchMovie() {

@@ -6,12 +6,19 @@ import java.sql.*;
 
 @Slf4j
 public class DataBaseQueries {
-    private final Connection connection = DriverManager.getConnection(
-            "jdbc:postgresql://localhost:5434/shareit", "root", "root");
-    private final Statement stmt = connection.createStatement();
 
-    public DataBaseQueries() throws SQLException {
+    private final Connection connection;
+    private final Statement stmt;
 
+    public DataBaseQueries(PropertiesConfiguration configuration) throws SQLException {
+        String dbHost = configuration.getDbHost();
+        String dbPort = configuration.getDbPort();
+        String dbName = configuration.getDbName();
+        String dbUser = configuration.getDbUser();
+        String dbPassword = configuration.getDbPassword();
+        String url = "jdbc:postgresql://" + dbHost + ":" + dbPort + "/" + dbName;
+        this.connection = DriverManager.getConnection(url, dbUser, dbPassword);
+        this.stmt = connection.createStatement();
     }
 
     public void fillUserData() throws SQLException {

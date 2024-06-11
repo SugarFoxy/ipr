@@ -5,6 +5,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.postgresql.util.PSQLException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.sql.ResultSet;
@@ -17,11 +18,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 //Создала чисто для того чтобы показать что с бд могу и так работать.
 @SpringBootTest
 public class DbTest {
+
+    @Autowired
+    private PropertiesConfiguration configuration;
+
     private static DataBaseQueries dataBaseQueries;
 
     @BeforeEach
     public void fillData() throws SQLException {
-        dataBaseQueries = new DataBaseQueries();
+        dataBaseQueries = new DataBaseQueries(configuration);
         dataBaseQueries.fillUserData();
         dataBaseQueries.fillItemData();
         dataBaseQueries.createDuplicateName();
