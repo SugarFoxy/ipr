@@ -29,7 +29,7 @@ jobs:
         run: |
           cd java-shareit
           ls
-          ./mvnw clean package
+          mvn clean package
           
 #      - name: Run docker-compose #запускаем сборку проекта
 #        uses: docker/compose-action@v2
