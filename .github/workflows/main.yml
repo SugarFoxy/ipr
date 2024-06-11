@@ -27,7 +27,7 @@ jobs:
           java-version: '11'   
       - name: Build project
         run: |
-          cd 'java-shareit'
+          cd java-shareit
           pwd
           ./mvnw clean package
           
