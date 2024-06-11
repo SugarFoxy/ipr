@@ -28,6 +28,7 @@ jobs:
       - name: Build project
         run: |
           cd 'java-shareit'
+          pwd
           ./mvnw clean package
           
 #      - name: Run docker-compose #запускаем сборку проекта
