@@ -4,32 +4,36 @@ on:
   workflow_dispatch:
   
 jobs:
+
   run:
     runs-on: ubuntu-latest
     services:
       docker:
         image: docker:latest
-
         
-    steps:
-    
-      - name: Load share-it project #забираем проект из ветки докера
-        uses: actions/checkout@v2
-        with:
-          repository: 'SugarFoxy/java-shareit'
-          path: 'java-shareit'
-          ref: 'refs/heads/add-docker'
+  steps:  
+  
+    - name: Установка JDK
+      uses: actions/setup-java@v2
+      with:
+        distribution: 'adopt'
+        java-version: '11'   
+        
+    - name: Сборка и упаковка проекта
+      run: |
+        cd java-shareit
+        mvn -DskipTests=true package
+        docker-compose up
 
-      - name: Set up JDK
-        uses: actions/setup-java@v2
-        with:
-          distribution: 'adopt'
-          java-version: '11'   
-      - name: Build project
-        run: |
-          cd java-shareit
-          mvn -DskipTests=true package
-          docker-compose up
+    - name: Подключение к проекту
+      uses: actions/checkout@v2
+
+    - name: Установка dcoker-compose
+      uses: docker/setup-compose@v1
+
+    - name: Запуск контейнеров
+      run: |
+        docker-compose -f docker-compose.yml up --build
           
       #- name: Extract allure reports #Настроить извличение отчетов
       #  run: |
@@ -40,6 +44,6 @@ jobs:
       #  with:
       #    path: ./allure-results
           
-      - name: Disable docker
-        run: docker-compose stop
+    - name: Disable docker
+      run: docker-compose stop
 
