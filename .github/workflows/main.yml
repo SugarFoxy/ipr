@@ -32,7 +32,7 @@ jobs:
           
       - name: Extract allure reports #Настроить извличение отчетов
         run: |
-          docker cp tests:/app/allure-results ./allure-results
+          docker cp tests-container:/app/allure-results ./allure-results
           
       - name: Disable docker
         run: docker-compose down
