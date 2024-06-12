@@ -9,12 +9,12 @@
     <name>ipr</name>
 
     <modules>
-        <module>ui-test</module>
         <module>db-test</module>
         <module>api-test</module>
+        <module>ui-test</module>
     </modules>
     <properties>
-        <path.to.chromedriver>./../chromedriver.exe</path.to.chromedriver>
+        <path.to.chromedriver>./../chromedriver</path.to.chromedriver>
         <java.version>11</java.version>
         <project.encoding>UTF-8</project.encoding>
         <maven.compiler.source>${java.version}</maven.compiler.source>

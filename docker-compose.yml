@@ -1,12 +1,36 @@
 version: '3.8'
 services:
-  testcont:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    image: ipr:latest
-    container_name:
-      tests-containerr
+  tests:
+    build: ipr
 
+    depends_on:
+      - server
+    container_name:
+      tests-container
     env_file:
       - tests.env
+
+  server:
+    build:
+      dockerfile: shareit/Dockerfile
+    container_name:
+      shareIt-server
+    ports:
+      - "9090:9090"
+    depends_on:
+      - db
+    env_file:
+      - shareit/server.env
+
+  db:
+    image: postgres:14.4-alpine
+
+    container_name:
+      postgresql
+    ports:
+      - "5455:5432"
+    volumes:
+      - /var/lib/postgresql/data/
+    env_file:
+      - shareit/db.env
+

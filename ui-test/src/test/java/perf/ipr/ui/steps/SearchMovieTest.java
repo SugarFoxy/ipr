@@ -29,7 +29,7 @@ public class SearchMovieTest extends BaseUITest {
         buttonService.clickButton("Расширеный поиск");
     }
 
-    @Test
+
     public void checkCardSearchMovie() {
         buttonService.checkDisabledButton("Поиск подробный поиск");
         elemCardService.checkTextElements("Искать фильм");

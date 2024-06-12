@@ -13,8 +13,6 @@ public class RestRequestConfig {
     private PropertiesConfiguration configuration;
 
     public RequestSpecification getSpecificationForGetAndDelete() {
-        ;
-        System.out.println("url::");
         System.out.println(configuration.getApiServerUrl());
         return new RequestSpecBuilder()
                 .setBaseUri(configuration.getApiServerUrl())
