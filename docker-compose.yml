@@ -1,8 +1,8 @@
 version: '3.8'
 services:
   tests:
-    build: ipr
-
+    build:
+      dockerfile: Dockerfile
     depends_on:
       - server
     container_name:
