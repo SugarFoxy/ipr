@@ -11,39 +11,38 @@ jobs:
       docker:
         image: docker:latest
         
-  steps:  
+    steps:    
+      - name: Установка JDK
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: '11'   
+          
+      - name: Сборка и упаковка проекта
+        run: |
+          cd java-shareit
+          mvn -DskipTests=true package
+          docker-compose up
   
-    - name: Установка JDK
-      uses: actions/setup-java@v2
-      with:
-        distribution: 'adopt'
-        java-version: '11'   
+      - name: Подключение к проекту
+        uses: actions/checkout@v2
+  
+      - name: Установка dcoker-compose
+        uses: docker/setup-compose@v1
+  
+      - name: Запуск контейнеров
+        run: |
+          docker-compose -f docker-compose.yml up --build
+            
+        #- name: Extract allure reports #Настроить извличение отчетов
+        #  run: |
+        #    docker cp <container_id>:/app/allure-results ./allure-results
         
-    - name: Сборка и упаковка проекта
-      run: |
-        cd java-shareit
-        mvn -DskipTests=true package
-        docker-compose up
-
-    - name: Подключение к проекту
-      uses: actions/checkout@v2
-
-    - name: Установка dcoker-compose
-      uses: docker/setup-compose@v1
-
-    - name: Запуск контейнеров
-      run: |
-        docker-compose -f docker-compose.yml up --build
-          
-      #- name: Extract allure reports #Настроить извличение отчетов
-      #  run: |
-      #    docker cp <container_id>:/app/allure-results ./allure-results
-      
-      #- name: Publish Allure report
-      #  uses: allure-framework/allure-github-actions@v2.11.0
-      #  with:
-      #    path: ./allure-results
-          
-    - name: Disable docker
-      run: docker-compose stop
+        #- name: Publish Allure report
+        #  uses: allure-framework/allure-github-actions@v2.11.0
+        #  with:
+        #    path: ./allure-results
+            
+      - name: Disable docker
+        run: docker-compose stop
 
