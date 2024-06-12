@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+  testcont:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ipr:latest
+    container_name:
+      tests-containerr
+
+    env_file:
+      - tests.env

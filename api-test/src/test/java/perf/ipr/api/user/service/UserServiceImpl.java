@@ -57,7 +57,8 @@ public class UserServiceImpl implements UserService {
         return userDto;
     }
     private static void setId(){
-        id = RestRequest.getResponse().as(UserDto.class).getId().toString();
+        var resp = RestRequest.getResponse().as(UserDto.class);
+        id = resp.getId().toString();
     }
     public static String getId() {
         return id;
