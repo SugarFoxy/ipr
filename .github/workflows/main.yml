@@ -30,7 +30,16 @@ jobs:
           cd java-shareit
           mvn -DskipTests=true package
           docker-compose up
-
+          
+      #- name: Extract allure reports #Настроить извличение отчетов
+      #  run: |
+      #    docker cp <container_id>:/app/allure-results ./allure-results
+      
+      #- name: Publish Allure report
+      #  uses: allure-framework/allure-github-actions@v2.11.0
+      #  with:
+      #    path: ./allure-results
+          
       - name: Disable docker
         run: docker-compose stop
 
