@@ -21,13 +21,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
         
-      - name: Package proj
+      - name: Package proj & run containers
         run: |
           mvn -DskipTests=true package
-
-      - name: Execute doker containers
-        run: |
-          docker-compose -f docker-compose.yml up --build
+          docker-compose up
             
         #- name: Extract allure reports #Настроить извличение отчетов
         #  run: |
