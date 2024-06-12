@@ -12,25 +12,21 @@ jobs:
         image: docker:latest
         
     steps:    
-      - name: Установка JDK
+      - name: Setup Java
         uses: actions/setup-java@v2
         with:
           distribution: 'adopt'
           java-version: '11'   
+
+      - name: setup 
+        uses: docker/setup-compose@v1
           
-      - name: Сборка и упаковка проекта
+      - name: Package proj
         run: |
           cd java-shareit
           mvn -DskipTests=true package
-          docker-compose up
-  
-      - name: Подключение к проекту
-        uses: actions/checkout@v2
-  
-      - name: Установка dcoker-compose
-        uses: docker/setup-compose@v1
-  
-      - name: Запуск контейнеров
+
+      - name: Execute doker containers
         run: |
           docker-compose -f docker-compose.yml up --build
             
