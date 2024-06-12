@@ -27,6 +27,7 @@ jobs:
         
       - name: Run containers
         run: |
+          docker-compose build 
           docker-compose up   
           
         #- name: Extract allure reports #Настроить извличение отчетов
