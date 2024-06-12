@@ -14,7 +14,7 @@
         <module>api-test</module>
     </modules>
     <properties>
-        <path.to.chromedriver>C:\Users\Alexander\Desktop\ipr-new\chromedriver.exe</path.to.chromedriver>
+        <path.to.chromedriver>./../chromedriver.exe</path.to.chromedriver>
         <java.version>11</java.version>
         <project.encoding>UTF-8</project.encoding>
         <maven.compiler.source>${java.version}</maven.compiler.source>
@@ -26,7 +26,6 @@
         <allure.version>2.17.2</allure.version>
         <google.gson.version>2.9.0</google.gson.version>
         <javax.version>2.2</javax.version>
-        <settings.localRepository>C:\Users\Alexander\.m2\repository\</settings.localRepository>
         <aspectj.version>1.9.20.1</aspectj.version>
         <project.build.sourceEncoding>${project.encoding}</project.build.sourceEncoding>
         <project.reporting.outputEncoding>${project.encoding}</project.reporting.outputEncoding>
@@ -72,9 +71,6 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.2.3</version>
                 <configuration>
-                    <argLine>
-                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
-                    </argLine>
                     <systemPropertyVariables>
                         <webdriver.chrome.driver>${path.to.chromedriver}</webdriver.chrome.driver>
                     </systemPropertyVariables>
