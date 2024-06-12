@@ -29,9 +29,15 @@ jobs:
         run: |
           docker-compose build 
           docker-compose up --abort-on-container-exit tests  
+
+      - name: Check Allure results directory
+        run: |
+          docker exec tests-container ls -la /app
+          docker exec tests-container ls -la /app/allure-results
           
       - name: Extract allure reports #Настроить извличение отчетов
         run: |
+          docker ps
           docker cp tests-container:/app/allure-results ./allure-results
           
       - name: Disable docker
