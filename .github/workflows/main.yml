@@ -75,6 +75,8 @@ jobs:
 
     permissions:
       id-token: write
+      contents: read
+      pages: write
     
     steps:
       - name: Download all workflow run artifacts
