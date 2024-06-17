@@ -33,7 +33,7 @@ jobs:
         run: docker cp tests-container:/app/target/allure-results ./allure-results
       
       - name: Store allure-results #Выгрузка для следующей джобы
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with: 
           name: allure-results
           path: allure-results
@@ -55,13 +55,13 @@ jobs:
           java-version: '11'       
 
       - name: Download allure-results #загрузка из предыдущей джобы
-        uses: actions/download-artifacts@v3
+        uses: actions/download-artifact@v4
       
       - run: | #Установка Allure и генерация отчета
           sudo wget https://github.com/allure-framework/allure2/releases/download/2.23.1/allure-2.23.1.tgz && sudo tar -zxvf allure-2.23.1.tgz -C /opt/ && sudo ln -s /opt/allure-2.23.1/bin/allure /usr/bin/allure
           allure generate -c allure-results -o _site
       - name: Store generated report #Передача в следующую джобу
-        uses: actions/download-artifact@v4
+        uses: actions/upload-artifact@v4
         with:
           name: _site
           path:
