@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
   
 jobs:
-
-  run:
+  build-and-test:
     runs-on: ubuntu-latest
+    name: Building app & execute test
     services:
       docker:
         image: docker:latest
@@ -21,24 +21,69 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
         
-      - name: Package proj
-        run: |
-          mvn -DskipTests=true package
+      - name: Package tests project
+        run: mvn -DskipTests=true package
         
-      - name: Run containers
+      - name: Run app & test in containers
         run: |
           docker-compose build 
-          docker-compose up   
-          
-        #- name: Extract allure reports #Настроить извличение отчетов
-        #  run: |
-        #    docker cp <container_id>:/app/allure-results ./allure-results
-        
-        #- name: Publish Allure report
-        #  uses: allure-framework/allure-github-actions@v2.11.0
-        #  with:
-        #    path: ./allure-results
-            
+          docker-compose up --abort-on-container-exit tests  
+
+      - name: Extract allure reports from containers #Извлечение отчетов из контейнера
+        run: docker cp tests-container:/app/target/allure-results ./allure-results
+      
+      - name: Store allure-results #Выгрузка для следующей джобы
+        uses: actions/upload-artifact@v4
+        with: 
+          name: allure-results
+          path: allure-results
+          retention-days: 1   
+
       - name: Disable docker
-        run: docker-compose stop
+        run: docker-compose down
+          
+  build-allure-report:  
+    runs-on: ubuntu-latest
+    name: generate & publish allure report
+    needs: build-and-test 
+
+    steps:
+      - name: Setup Java
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: '11'       
+
+      - name: Download allure-results #загрузка из предыдущей джобы
+        uses: actions/download-artifact@v4
+      
+      - run: | #Установка Allure и генерация отчета
+          sudo wget https://github.com/allure-framework/allure2/releases/download/2.23.1/allure-2.23.1.tgz && sudo tar -zxvf allure-2.23.1.tgz -C /opt/ && sudo ln -s /opt/allure-2.23.1/bin/allure /usr/bin/allure
+          allure generate -c allure-results -o _site
+      - name: Store generated report #Передача в следующую джобу
+        uses: actions/upload-artifact@v4
+        with:
+          name: _site
+          path:
+            _site
+          retention-days: 1
+          
+  publish-report:
+    runs-on: ubuntu-latest
+    needs: build-allure-report
+    name: Publish reports
+
+    permissions:
+      id-token: write
+      contents: read
+      pages: write
+    
+    steps:
+      - name: Download all workflow run artifacts
+        uses: actions/download-artifact@v4
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v2
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1.2.9        
 
