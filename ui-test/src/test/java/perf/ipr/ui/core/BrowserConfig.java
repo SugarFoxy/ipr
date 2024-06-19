@@ -9,7 +9,7 @@ public class BrowserConfig {
         Configuration.browser = "chrome";
         Configuration.headless = true;
         Configuration.startMaximized = true;
-        Configuration.baseUrl = "https://www.kinopoisk.ru";//configuration.getUrl();
+        Configuration.baseUrl = configuration.getUrl();
         Configuration.timeout = 10000;
     }
 }
