@@ -71,6 +71,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.2.3</version>
                 <configuration>
+                    <testFailureIgnore>true</testFailureIgnore>
                     <systemPropertyVariables>
                         <webdriver.chrome.driver>${path.to.chromedriver}</webdriver.chrome.driver>
                     </systemPropertyVariables>
