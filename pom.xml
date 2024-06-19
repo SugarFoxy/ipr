@@ -14,7 +14,7 @@
         <module>ui-test</module>
     </modules>
     <properties>
-        <path.to.chromedriver>./../chromedriver</path.to.chromedriver>
+        <path.to.chromedriver>${env.CHROMEDRIVERPATH}</path.to.chromedriver>
         <java.version>11</java.version>
         <project.encoding>UTF-8</project.encoding>
         <maven.compiler.source>${java.version}</maven.compiler.source>
