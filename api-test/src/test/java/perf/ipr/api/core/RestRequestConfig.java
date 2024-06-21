@@ -19,7 +19,7 @@ public class RestRequestConfig {
                 .build();
     }
 
-    public RequestSpecification getSpecificationForPostAndPatch(String body) {
+    public RequestSpecification getSpecificationForPostAndPatch(Object body) {
         System.out.println("url::");
         System.out.println(configuration.getApiServerUrl());
         return new RequestSpecBuilder()

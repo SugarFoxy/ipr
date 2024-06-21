@@ -2,6 +2,7 @@ package perf.ipr.api.core;
 
 import io.restassured.response.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
@@ -10,6 +11,7 @@ import static io.restassured.RestAssured.given;
 
 @Component
 public class RestRequest {
+
     private static RestRequestConfig restRequestConfig;
 
     @Autowired
@@ -34,7 +36,7 @@ public class RestRequest {
                 .extract().response();
     }
 
-    public static Response executePostRequest(String path, String body) {
+    public static Response executePostRequest(String path, Object body) {
         return given().spec(restRequestConfig.getSpecificationForPostAndPatch(body))
                 .when()
                 .post(path)
@@ -60,7 +62,7 @@ public class RestRequest {
                 .extract().response();
     }
 
-    public static Response executePatchRequestWithPathParam(String path, String body, Map<String, String> params) {
+    public static Response executePatchRequestWithPathParam(String path, Object body, Map<String, String> params) {
         return given().spec(restRequestConfig.getSpecificationForPostAndPatch(body))
                 .when()
                 .pathParams(params)

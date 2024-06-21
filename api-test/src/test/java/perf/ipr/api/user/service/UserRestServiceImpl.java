@@ -1,13 +1,12 @@
 package perf.ipr.api.user.service;
 
+import com.google.gson.Gson;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import perf.ipr.api.core.RestRequest;
-import perf.ipr.api.core.RestRequestConfig;
 import perf.ipr.api.user.dto.UserDto;
-import perf.ipr.api.util.GeneratorJson;
 
 import java.util.Map;
 
@@ -18,14 +17,14 @@ public class UserRestServiceImpl implements UserRestService {
     @Step("Создать нового пользователя POST /users")
     public Response createUser(UserDto userDto) {
         return RestRequest.executePostRequest("/users",
-                GeneratorJson.toJson(userDto));
+                userDto);
     }
 
     @Override
     @Step("Обновить данные пользователя PATCH /users/{userId}")
     public Response updateUser(UserDto userDto) {
         return RestRequest.executePatchRequestWithPathParam("/users/{userId}",
-                GeneratorJson.toJson(userDto),
+                userDto,
                 Map.of("userId", userDto.getId().toString()));
     }
 
