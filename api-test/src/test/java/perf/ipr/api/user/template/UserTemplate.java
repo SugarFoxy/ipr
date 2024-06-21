@@ -7,16 +7,14 @@ import java.time.LocalDateTime;
 
 @Component
 public class UserTemplate {
-    private static String email;
     public static UserDto getCorrectUserData(){
-        email = LocalDateTime.now() + "user@mail.ru";
         return UserDto.builder()
-                .email(email)
+                .email(LocalDateTime.now() +"user@mail.ru")
                 .name("Трус")
                 .build();
     }
 
-    public static UserDto getDuplicateUserData() {
+    public static UserDto getDuplicateUserEmail(String email) {
         return UserDto.builder()
                 .email(email)
                 .name("Балбес")

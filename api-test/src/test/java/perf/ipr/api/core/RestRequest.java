@@ -10,25 +10,23 @@ import static io.restassured.RestAssured.given;
 
 @Component
 public class RestRequest {
+    private static RestRequestConfig restRequestConfig;
+
     @Autowired
-    private RestRequestConfig restRequestConfig;
-
-    public static Response getResponse() {
-        return response;
+    public void setRestRequestConfig(RestRequestConfig restRequestConfig) {
+        RestRequest.restRequestConfig = restRequestConfig;
     }
 
-    public static Response response;
-
-    public void executeGetRequest(String path) {
-        response = given().spec(restRequestConfig.getSpecificationForGetAndDelete())
+    public static Response executeGetRequest(String path) {
+        return given().spec(restRequestConfig.getSpecificationForGetAndDelete())
                 .when()
                 .get(path)
                 .then()
                 .extract().response();
     }
 
-    public void executeGetRequestWithPathParam(String path, Map<String, String> params) {
-        response = given().spec(restRequestConfig.getSpecificationForGetAndDelete())
+    public static Response executeGetRequestWithPathParam(String path, Map<String, String> params) {
+        return given().spec(restRequestConfig.getSpecificationForGetAndDelete())
                 .when()
                 .pathParams(params)
                 .get(path)
@@ -36,16 +34,16 @@ public class RestRequest {
                 .extract().response();
     }
 
-    public void executePostRequest(String path, String body) {
-        response = given().spec(restRequestConfig.getSpecificationForPostAndPatch(body))
+    public static Response executePostRequest(String path, String body) {
+        return given().spec(restRequestConfig.getSpecificationForPostAndPatch(body))
                 .when()
                 .post(path)
                 .then()
                 .extract().response();
     }
 
-    public void executePostRequestWithPathParam(String path, String body, Map<String, String> params) {
-        response = given().spec(restRequestConfig.getSpecificationForPostAndPatch(body))
+    public static Response executePostRequestWithPathParam(String path, String body, Map<String, String> params) {
+        return given().spec(restRequestConfig.getSpecificationForPostAndPatch(body))
                 .when()
                 .pathParams(params)
                 .post(path)
@@ -53,8 +51,8 @@ public class RestRequest {
                 .extract().response();
     }
 
-    public void executeDeleteRequestWithPathParam(String path, Map<String, String> params) {
-        response = given().spec(restRequestConfig.getSpecificationForGetAndDelete())
+    public static Response executeDeleteRequestWithPathParam(String path, Map<String, String> params) {
+        return given().spec(restRequestConfig.getSpecificationForGetAndDelete())
                 .when()
                 .pathParams(params)
                 .delete(path)
@@ -62,8 +60,8 @@ public class RestRequest {
                 .extract().response();
     }
 
-    public void executePatchRequestWithPathParam(String path, String body, Map<String, String> params) {
-        response = given().spec(restRequestConfig.getSpecificationForPostAndPatch(body))
+    public static Response executePatchRequestWithPathParam(String path, String body, Map<String, String> params) {
+        return given().spec(restRequestConfig.getSpecificationForPostAndPatch(body))
                 .when()
                 .pathParams(params)
                 .patch(path)
