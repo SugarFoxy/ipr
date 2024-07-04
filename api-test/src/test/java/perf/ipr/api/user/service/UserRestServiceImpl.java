@@ -1,6 +1,5 @@
 package perf.ipr.api.user.service;
 
-import com.google.gson.Gson;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,18 +11,20 @@ import java.util.Map;
 
 @Service
 public class UserRestServiceImpl implements UserRestService {
+    @Autowired
+    private RestRequest restRequest;
 
     @Override
     @Step("Создать нового пользователя POST /users")
     public Response createUser(UserDto userDto) {
-        return RestRequest.executePostRequest("/users",
+        return restRequest.executePostRequest("/users",
                 userDto);
     }
 
     @Override
     @Step("Обновить данные пользователя PATCH /users/{userId}")
     public Response updateUser(UserDto userDto) {
-        return RestRequest.executePatchRequestWithPathParam("/users/{userId}",
+        return restRequest.executePatchRequestWithPathParam("/users/{userId}",
                 userDto,
                 Map.of("userId", userDto.getId().toString()));
     }
@@ -31,14 +32,14 @@ public class UserRestServiceImpl implements UserRestService {
     @Override
     @Step("Получить данные пользователя GET /users/{userId}")
     public Response getUserById(Long id) {
-        return RestRequest.executeGetRequestWithPathParam("/users/{userId}",
+        return restRequest.executeGetRequestWithPathParam("/users/{userId}",
                 Map.of("userId", id.toString()));
     }
 
     @Override
     @Step("Удалить данные пользователя DELETE /users/{userId}")
     public Response deleteUserById(Long id) {
-        return RestRequest.executeDeleteRequestWithPathParam("/users/{userId}",
+        return restRequest.executeDeleteRequestWithPathParam("/users/{userId}",
                 Map.of("userId", id.toString()));
     }
 

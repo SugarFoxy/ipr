@@ -1,7 +1,7 @@
 package perf.ipr.ui.storage.impl;
 
 import com.codeborne.selenide.SelenideElement;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import perf.ipr.ui.storage.ElementStorage;
 
 import java.util.HashMap;
@@ -9,9 +9,8 @@ import java.util.Map;
 
 import static com.codeborne.selenide.Selenide.$x;
 
-@Component
+@Service
 public class MoviePageStorage implements ElementStorage {
-
     @Override
     public Map<String, SelenideElement> getElements() {
         Map<String, SelenideElement> elements = new HashMap<>();

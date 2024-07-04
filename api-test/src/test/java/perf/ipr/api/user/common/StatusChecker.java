@@ -3,7 +3,6 @@ package perf.ipr.api.user.common;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import lombok.extern.slf4j.Slf4j;
-import perf.ipr.api.core.RestRequest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -14,6 +13,6 @@ public class StatusChecker {
         Integer statusCode = response.getStatusCode();
         log.info(response.getBody().print());
         assertEquals(statusCode, status,
-                String.format("Ожидался код - %d, пришел - %d", status, statusCode));
+                String.format("Ожидался к`од - %d, пришел - %d", status, statusCode));
     }
 }

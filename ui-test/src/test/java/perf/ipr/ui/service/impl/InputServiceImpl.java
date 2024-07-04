@@ -1,23 +1,23 @@
 package perf.ipr.ui.service.impl;
 
 import io.qameta.allure.Step;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import perf.ipr.ui.service.InputService;
 import perf.ipr.ui.storage.InputStorage;
 
 import static org.springframework.test.util.AssertionErrors.assertEquals;
 
-@Service
-public class InputServiceImpl implements InputService {
-    @Autowired
-    private InputStorage inputStorage;
 
+public class InputServiceImpl implements InputService {
+    private final InputStorage inputStorage;
+
+    public InputServiceImpl(InputStorage inputStorage) {
+        this.inputStorage = inputStorage;
+    }
 
     @Override
     public void fillAndCheck(String name, String value) {
-        fillInput(name,value);
-        checkFilledInput(name,value);
+        fillInput(name, value);
+        checkFilledInput(name, value);
     }
 
     @Override

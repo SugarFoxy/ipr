@@ -12,6 +12,7 @@ import static com.codeborne.selenide.Selenide.$x;
 
 @Service
 public class SearchMovieStorage implements ButtonStorage, ElemCardStorage, InputStorage, SelectStorage, CheckBoxStorage {
+
     @Override
     public Map<String, SelenideElement> getButtons() {
         Map<String, SelenideElement> buttons = new HashMap<>();

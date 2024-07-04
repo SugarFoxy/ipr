@@ -1,24 +1,27 @@
 package perf.ipr.db;
 
 import lombok.extern.slf4j.Slf4j;
+import org.postgresql.ds.PGSimpleDataSource;
 
-import java.sql.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 @Slf4j
 public class DataBaseQueries {
 
-    private final Connection connection;
     private final Statement stmt;
 
     public DataBaseQueries(PropertiesConfiguration configuration) throws SQLException {
-        String dbHost = configuration.getDbHost();
-        String dbPort = configuration.getDbPort();
-        String dbName = configuration.getDbName();
-        String dbUser = configuration.getDbUser();
-        String dbPassword = configuration.getDbPassword();
-        String url = "jdbc:postgresql://" + dbHost + ":" + dbPort + "/" + dbName;
-        this.connection = DriverManager.getConnection(url, dbUser, dbPassword);
-        this.stmt = connection.createStatement();
+        String[] servers = {configuration.getDbHost()};
+        int[] ports = {Integer.parseInt(configuration.getDbPort())};
+        PGSimpleDataSource dataSource = new PGSimpleDataSource();
+        dataSource.setServerNames(servers);
+        dataSource.setPortNumbers(ports);
+        dataSource.setDatabaseName(configuration.getDbName());
+        dataSource.setUser(configuration.getDbUser());
+        dataSource.setPassword(configuration.getDbPassword());
+        this.stmt = dataSource.getConnection().createStatement();
     }
 
     public void fillUserData() throws SQLException {

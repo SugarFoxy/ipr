@@ -3,19 +3,18 @@ package perf.ipr.ui.service.impl;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import perf.ipr.ui.service.CheckBoxService;
 import perf.ipr.ui.storage.CheckBoxStorage;
 
-@Service
 public class CheckBoxServiceImpl implements CheckBoxService {
+    private final CheckBoxStorage checkBoxStorage;
 
-    @Autowired
-    private CheckBoxStorage checkBoxStorage;
+    public CheckBoxServiceImpl(CheckBoxStorage checkBoxStorage) {
+        this.checkBoxStorage = checkBoxStorage;
+    }
 
     @Override
-    public void checkCheckBox(String name){
+    public void checkCheckBox(String name) {
         this.clickCheckBox(name);
         this.checkSelectedCheckBox(name);
     }

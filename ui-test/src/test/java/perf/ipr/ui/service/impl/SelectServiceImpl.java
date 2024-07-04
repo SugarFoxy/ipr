@@ -4,8 +4,6 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import perf.ipr.ui.service.SelectService;
 import perf.ipr.ui.storage.SelectStorage;
 
@@ -14,26 +12,27 @@ import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@Service
+
 public class SelectServiceImpl implements SelectService {
+    private final SelectStorage selectStorage;
 
-    @Autowired
-    private SelectStorage selectStorage;
-
-
-    @Override
-    public void checkMultiSelect(String name, String value){
-        this.checkOpenedSelectOptions(name);
-        this.selectElement(name,value);
-        this.checkSelectedElement(name,value);
+    public SelectServiceImpl(SelectStorage selectStorage) {
+        this.selectStorage = selectStorage;
     }
 
     @Override
-    public void checkSelect(String name, String value){
+    public void checkMultiSelect(String name, String value) {
+        this.checkOpenedSelectOptions(name);
+        this.selectElement(name, value);
+        this.checkSelectedElement(name, value);
+    }
+
+    @Override
+    public void checkSelect(String name, String value) {
         this.clickSelect(name);
         this.checkOpenedSelectOptions(name);
-        this.selectElement(name,value);
-        this.checkSelectedElement(name,value);
+        this.selectElement(name, value);
+        this.checkSelectedElement(name, value);
     }
 
 
